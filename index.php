@@ -5,12 +5,16 @@
 	$token = "";
 	$success = "";
 
-	//print_r($_POST).die();
 	if (isset($_POST['generate'])) {
 		$token = post('http://localhost/ded72a901fd28ec2e8c1971b1c5378ae/Controller/GenerateTokenApi.php',['id' => 3,'username' => 'broyld']);
-		//print_r($token);
-		unset($_POST);
-		$_SESSION['token'] = json_decode($token,true)['token'];
+		$token = json_decode($token,true);
+		//print_r($token).die();
+		if ($token['success'] == false) {
+			echo $token['message'];
+		}else{
+			unset($_POST);
+			$_SESSION['token'] = $token['token'];
+		}
 	}
 
 	if (isset($_POST['send'])) {

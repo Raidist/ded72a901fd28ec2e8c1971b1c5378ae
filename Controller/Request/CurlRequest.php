@@ -16,8 +16,8 @@
     		'Content-Type: application/json',
 		));
 		curl_setopt($init, CURLOPT_RETURNTRANSFER, true);
-		//print_r($init).die();
 		$output = curl_exec($init);
+		//print_r($output).die();
 
 		curl_close($init);
 

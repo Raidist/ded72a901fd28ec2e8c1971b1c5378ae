@@ -1,17 +1,21 @@
 <?php
 	
 	function generateAuthApi($input){
-		$data = showWhere(['id' => 3],'tbl_user',true);
-		$username = $data['username'];
-		$specialId = bin2hex(random_bytes(5));
-		$signature = md5("RaidistRavelion");
-
-		$token = base64_encode($username."|".$specialId."|".$signature);
-		$storeSecret = update(['special_id' => $specialId],'tbl_user','username',$username);
-		if ($storeSecret == true) {
-			return $token;
+		$data = showWhere(['id' => $input['id']],'tbl_user',true);
+		if (isset($data['success']) && $data['success'] == false) {
+			return ['success' => false, 'message' => 'User not valid, make sure user with id 1(default) is available in database'];
 		}else{
-			print_r(json_encode(['success' => false, 'message' => 'Create Token Fail']));
+			$username = $data['username'];
+			$specialId = bin2hex(random_bytes(5));
+			$signature = md5("RaidistRavelion");
+
+			$token = base64_encode($username."|".$specialId."|".$signature);
+			$storeSecret = update(['special_id' => $specialId],'tbl_user','username',$username);
+			if ($storeSecret == true) {
+				return ['token' => $token,'success' => true,'message' => 'Token Created'];
+			}else{
+				return ['success' => false, 'message' => 'Create Token Fail'];
+			}
 		}
 		/*$result = base64_decode($token);
 		$token = explode("|",$result);

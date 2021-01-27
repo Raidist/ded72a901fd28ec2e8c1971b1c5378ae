@@ -59,7 +59,7 @@
 			$query = pg_query($GLOBALS['dbconn'],$sql);
 			$result = pg_fetch_assoc($query);
 			if (empty($result)) {
-				print_r(json_encode(['success' => false, 'message' => 'data kosong']));
+				return ['success' => false, 'message' => 'data kosong'];
 			}
 
 		}catch(Exeption $e){
