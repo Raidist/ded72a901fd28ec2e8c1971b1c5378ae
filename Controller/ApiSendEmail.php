@@ -55,9 +55,6 @@ if (!empty($input) && isset($input['email'])) {
 			die();
 		}
 
-		$store = store($input,'email_comment');
-
-
 	}catch(Exception $e){
 		print_r(json_encode(['success' => 'false','message' => 'Message could not be sent to user. Mailer Error: '.$mail->ErrorInfo]));
 		die();
