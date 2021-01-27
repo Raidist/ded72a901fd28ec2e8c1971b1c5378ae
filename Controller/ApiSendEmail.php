@@ -22,7 +22,7 @@ if (!empty($input) && isset($input['email'])) {
 	$mail = new PHPMailer(true);
 	try{
 		//Stmp Setting (change With your own setting)
-		$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+		$mail->SMTPDebug = 0;
 		$mail->isSMTP();
 		$mail->Host = '';
 		$mail->SMTPAuth = true;
