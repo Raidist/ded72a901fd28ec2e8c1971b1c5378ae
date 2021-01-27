@@ -40,7 +40,7 @@
 		return $result;
 	}
 
-	function showWhere($where=[],$table,$limit = false){
+	function showWhere($where=[],$table,$limit = null){
 		try{
 			$sql = "SELECT * FROM {$table} ";
 			if (!empty($where) && is_array($where)) {
@@ -54,8 +54,11 @@
 						$count++;
 					}
 				}
+
+				if (!empty($limit)) {
+					$sql .= "LIMIT ".$limit." ";
+				}
 			}
-			//print_r($sql).die();
 			$query = pg_query($GLOBALS['dbconn'],$sql);
 			$result = pg_fetch_assoc($query);
 			if (empty($result)) {
@@ -65,11 +68,7 @@
 		}catch(Exeption $e){
 			print_r($e).die();
 		}
-		if (!empty($limit) && $limit == true) {
-			return $result;	
-		}else{
-			return $result;
-		}
-		
+
+		return $result;		
 	}
 ?>

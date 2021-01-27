@@ -30,7 +30,7 @@
 			if ($send['success'] == true) {
 				$success = $send['message'];
 			}else{
-				$success = "Error has Occurred,send fail";
+				$success = $send['message'];
 			}
 			//print_r($send).die();
 		}else{

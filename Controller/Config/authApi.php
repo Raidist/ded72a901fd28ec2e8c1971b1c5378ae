@@ -1,7 +1,7 @@
 <?php
 	
 	function generateAuthApi($input){
-		$data = showWhere(['id' => $input['id']],'tbl_user',true);
+		$data = showWhere(['id' => $input['id']],'tbl_user');
 		if (isset($data['success']) && $data['success'] == false) {
 			return ['success' => false, 'message' => 'User not valid, make sure user with id 1(default) is available in database'];
 		}else{
